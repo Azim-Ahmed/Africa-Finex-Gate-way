@@ -21,11 +21,15 @@ const BuyerSecondPage = () => {
         var valid = WAValidator.validate(InputData, 'BTC');
 
         if (valid) {
-            history.push("/localbank")
             setWalletID(InputData)
+            history.push("/localbank")
+
         }
-        else
-            alert('This is a inValid address');
+        else {
+            alert('This is a inValid address ');
+            history.push("/buyerSecondPage")
+        }
+
     }
 
     //1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck
@@ -33,7 +37,10 @@ const BuyerSecondPage = () => {
         <Container className=" mt-5">
             <Row>
                 <Col sm={12} md={{ size: 6, offset: 3 }}>
-                    <p>{walletID}</p>
+                    <p>
+                        Check with this wallet<br />
+                    1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck
+                    </p>
                     <form onSubmit={submitData}>
                         <input
                             ref={searchInput}

@@ -28,13 +28,16 @@ const SelectedCoin = () => {
 
     const handleQuantity = (e) => {
         const InputQuantity = e.target.value
-        if (InputQuantity === "") {
+        if (InputQuantity.trim() === "") {
             alert("please input correctly")
             history.push("/")
 
         }
-        setQuantity(InputQuantity)
-        history.push("/buyerSecondPage")
+        else {
+            setQuantity(InputQuantity)
+            history.push("/buyerSecondPage")
+        }
+
     }
 
     return (

@@ -13,6 +13,7 @@ import SuccessBuy from "./components/buyer/SuccessBuy";
 import TransferOfBuyer from "./components/buyer/TransferOfBuyer";
 import Footer from "./components/Footer/Footer";
 import NavSection from "./components/Header/NavSection";
+import NoServices from "./components/NoServices/NoServices";
 import SellFinishedInfo from "./components/Seller/SellFinishedInfo";
 import SellIBANaccountDetails from "./components/Seller/SellIBANaccountDetails";
 import SellTXIDGenerate from "./components/Seller/SellTXIDGenerate";
@@ -43,7 +44,18 @@ function App() {
   })
 
   return (
-    <UserContext.Provider value={{ buyerDataPost, setBuyerDataPost, buyerData, setBuyerData, walletID, setWalletID, quantity, setQuantity, sellerData, setSellerData }}>
+    <UserContext.Provider value={{
+      buyerDataPost,
+      setBuyerDataPost,
+      buyerData,
+      setBuyerData,
+      walletID,
+      setWalletID,
+      quantity,
+      setQuantity,
+      sellerData,
+      setSellerData
+    }}>
       <Router>
         <NavSection />
         <Switch>
@@ -77,6 +89,9 @@ function App() {
           </Route>
           <Route path="/sellfinishedinfo">
             <SellFinishedInfo />
+          </Route>
+          <Route path="/*">
+            <NoServices />
           </Route>
         </Switch>
         <Footer />

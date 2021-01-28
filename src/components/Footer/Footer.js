@@ -9,10 +9,7 @@ const Footer = () => {
                     <Col className="text-center my-4" md={5} lg={5} sm={12} xs={12}>
                         <img width="30%" className="pb-4" src="" alt="" />
                         <div className="text-center">
-                            <img className="img-fluid mr-4" src="" alt="" />
-                            <img className="img-fluid mr-4 " src="" alt="" />
-                            <img className="img-fluid mr-4 " src="" alt="" />
-                            <img className="img-fluid mr-4 " src="" alt="" />
+                            <h3 className="text-warning">A trustwory exchange site</h3>
                         </div>
                     </Col>
                     <Col className="text-center my-4" md={2} lg={2} sm={12} xs={12}>

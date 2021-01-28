@@ -60,10 +60,8 @@ const LocalbankthirdPage = () => {
                             the best P2P for you.
                        </p>
                     </strong>
-
-
-                    <Link to="/"><p className=" my-5" >How long does it usually take ?</p></Link>
-                    <Link to="/transferofbuyer">
+                    <Link to="/"><p className="text-center my-5" >How long does it usually take ?</p></Link>
+                    <Link to={buyerDataPost.bankName ? '/transferofbuyer' : "/localbank"}>
                         <Button block size="lg" type="submit" color="danger">Next</Button>
                     </Link>
                 </Col>

@@ -43,7 +43,11 @@ const StableCoinSellOne = () => {
             <Row>
                 <Col className="sell_section_card_background" sm={12} md={{ size: 6, offset: 3 }}>
                     <h3>Stablecoin gateway - SELL</h3>
-                    <ButtonDropdown className="mt-4" isOpen={dropdownOpen} toggle={toggle}>
+                    <ButtonDropdown
+                        className="mt-4"
+                        isOpen={dropdownOpen}
+                        toggle={toggle}
+                    >
                         <DropdownToggle color="primary" caret>
                             Choose a token
                          </DropdownToggle>
@@ -65,6 +69,7 @@ const StableCoinSellOne = () => {
                     <input
                         onBlur={(e) => setSellQuantity(e.target.value)}
                         name="quantity"
+                        type="number"
                         placeholder="Quantity"
                         className="form-control"
                     />
@@ -72,7 +77,8 @@ const StableCoinSellOne = () => {
                     <h4 className="my-5">You will get X AOA  @Preco  TAOA/AOA</h4>
 
                     {/* condition routing must */}
-                    <Link to="/stablecoinselltwo">
+                    <Link to={sellerData.token && sellerData.sellingQuantity ? "/stablecoinselltwo" :
+                        "stablecoinsellone"}>
                         <Button
                             className="text-center mt-4"
                             type="submit"

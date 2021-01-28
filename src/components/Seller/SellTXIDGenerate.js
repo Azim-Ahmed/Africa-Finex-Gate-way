@@ -1,4 +1,4 @@
-import { useRef, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { UserContext } from '../../App';
@@ -27,14 +27,19 @@ const SellTXIDGenerate = () => {
         <Container className=" mt-5">
             <Row>
                 <Col sm={12} md={{ size: 6, offset: 3 }}>
-                    <h5>Transfer your token "Token ID" to the following BSC(Binance Smart Chain)
-                        address and enter the resulting TXID </h5>
-                    <h4 className="mt-5" >This will be TXID dynamic</h4>
+                    <h5>
+                        Transfer your token <span className="text-info">{sellerData.token} </span>
+                         to the following BSC(Binance Smart Chain)
+                        address and enter the resulting TXID
+                    </h5>
+                    <h4 className="mt-5" >
+                        TXID :  <span className="text-info">{sellerData.TXID} </span>
+                    </h4>
                     <form>
                         <input
                             onBlur={(e) => setTXIDGenerate(e.target.value)}
                             className="form-control mt-5"
-                            placeholder="TXID mandatory Info"
+                            placeholder="Write some TXID mandatory Info"
                             type="text"
                         />
                         <strong>
