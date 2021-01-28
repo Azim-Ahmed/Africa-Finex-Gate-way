@@ -46,7 +46,11 @@ const LocalbankthirdPage = () => {
                                 {bank.name}</DropdownItem>)}
                         </DropdownMenu>
                     </ButtonDropdown>
-
+                    {localBank ?
+                        <h4>
+                            You have choosen
+                         <span className="text-info">{localBank}</span>
+                        </h4> : ""}
                     <strong>
                         <p className="mt-5 text-dark">
                             Transfers between banks are usually faster.
