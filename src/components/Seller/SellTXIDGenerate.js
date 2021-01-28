@@ -7,10 +7,8 @@ const SellTXIDGenerate = () => {
     //states of the components 
     const { sellerData } = useContext(UserContext)
     const [TXIDGenerate, setTXIDGenerate] = useState("")
-    console.log(TXIDGenerate);
 
     sellerData.TXIdInfo = TXIDGenerate;
-    console.log(sellerData);
 
     const handleSellingCoinData = () => {
 

@@ -10,7 +10,7 @@ const BuyerSecondPage = () => {
 
     let history = useHistory();
     const searchInput = useRef('');
-    const { walletID, setWalletID } = useContext(UserContext)
+    const { setWalletID } = useContext(UserContext)
 
 
     const submitData = (e) => {
@@ -31,8 +31,6 @@ const BuyerSecondPage = () => {
         }
 
     }
-
-    //1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck
     return (
         <Container className=" mt-5">
             <Row>

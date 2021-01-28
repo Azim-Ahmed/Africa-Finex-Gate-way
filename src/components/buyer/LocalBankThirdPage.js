@@ -27,12 +27,7 @@ const LocalbankthirdPage = () => {
     buyerDataPost.walletId = walletID;
     buyerDataPost.swapId = Math.floor(Math.random() * 1138913219272982)
 
-
-
-    console.log(buyerData);
-    console.log(buyerDataPost);
     setBuyerDataPost(buyerDataPost);
-    // setBuyerDataPost(data)
 
     const toggle = () => setOpen(!dropdownOpen);
     return (
@@ -60,7 +55,9 @@ const LocalbankthirdPage = () => {
                             the best P2P for you.
                        </p>
                     </strong>
-                    <Link to="/"><p className="text-center my-5" >How long does it usually take ?</p></Link>
+                    <Link to="/">
+                        <p className="text-center my-5" >How long does it usually take ?</p>
+                    </Link>
                     <Link to={buyerDataPost.bankName ? '/transferofbuyer' : "/localbank"}>
                         <Button block size="lg" type="submit" color="danger">Next</Button>
                     </Link>
