@@ -2,7 +2,23 @@
     background: cornsilk;
     margin-top: 1.5rem;
     padding: 2rem;
+    box-shadow: 1px 1px 20px rgb(214, 211, 211);
+    border-radius: 8px;
 }
 a:hover{
     text-decoration: none !important;
+}
+.buyer_background_page_two{
+    background: rgb(245, 242, 229);
+    margin-top: 1.5rem;
+    padding: 4rem;
+    box-shadow: 1px 1px 20px rgb(214, 211, 211);
+    border-radius: 8px; 
+}
+.buyer_background_page_transfer{
+    background: rgb(245, 242, 229);
+    margin-top: 1.5rem;
+    padding: 4rem;
+    box-shadow: 1px 1px 20px rgb(214, 211, 211);
+    border-radius: 8px;   
 }

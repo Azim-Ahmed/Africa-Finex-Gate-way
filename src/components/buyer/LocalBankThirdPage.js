@@ -14,6 +14,9 @@ const LocalbankthirdPage = () => {
         },
         {
             name: "North-state Bank"
+        },
+        {
+            name: "Modhumoti Bank"
         }
     ]
 
@@ -33,23 +36,26 @@ const LocalbankthirdPage = () => {
     return (
         <Container>
             <Row className="mt-5">
-                <Col sm={12} md={{ size: 6, offset: 3 }}>
-                    <ButtonDropdown className="mb-5" isOpen={dropdownOpen} toggle={toggle}>
+                <Col className="buyer_background_page_two" sm={12} md={{ size: 6, offset: 3 }}>
+                    <ButtonDropdown
+                        className="mb-5"
+                        isOpen={dropdownOpen}
+                        toggle={toggle}>
                         <DropdownToggle color="primary" caret>
                             Choose a local Bank
-        </DropdownToggle>
+                        </DropdownToggle>
                         <DropdownMenu className="text-dark">
-                            {BankName.map((bank, i) => <DropdownItem
-                                onClick={() => setLocalBank(bank.name)}
-                                key={i}
-                            >
-                                {bank.name}</DropdownItem>)}
+                            {BankName.map((bank, i) =>
+                                <DropdownItem
+                                    onClick={() => setLocalBank(bank.name)}
+                                    key={i}
+                                >
+                                    {bank.name}</DropdownItem>)}
                         </DropdownMenu>
                     </ButtonDropdown>
                     {localBank ?
                         <h4>
-                            You have choosen
-                         <span className="text-info">{localBank}</span>
+                            You have choosen <span className="text-info"> {localBank} </span>
                         </h4> : ""}
                     <strong>
                         <p className="mt-5 text-dark">
@@ -63,7 +69,7 @@ const LocalbankthirdPage = () => {
                         <p className="text-center my-5" >How long does it usually take ?</p>
                     </Link>
                     <Link to={buyerDataPost.bankName ? '/transferofbuyer' : "/localbank"}>
-                        <Button block size="lg" type="submit" color="danger">Next</Button>
+                        <Button block size="lg" type="submit" color="warning">Next</Button>
                     </Link>
                 </Col>
             </Row>

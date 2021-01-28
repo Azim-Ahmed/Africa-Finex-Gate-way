@@ -1,10 +1,14 @@
 .sell_section_card_background{
-    background: rgb(241, 240, 221);
+    background: rgb(243, 243, 232);
     margin-top: 1.5rem;
     padding: 2rem;
+    box-shadow: 1px 1px 20px rgb(214, 211, 211);
+    border-radius: 8px;
 }
 .sell_section_two_card_background{
     margin-top: 2rem;
-    background: rgb(241, 240, 221);
+    background: rgb(243, 243, 232);
     padding: 4rem;
+    box-shadow: 1px 1px 20px rgb(214, 211, 211);
+    border-radius: 8px;
 }

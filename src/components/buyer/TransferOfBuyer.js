@@ -23,8 +23,8 @@ const TransferOfBuyer = () => {
     return (
         <Container>
             <Row>
-                <Col sm={12} md={{ size: 6, offset: 3 }}>
-                    <h4 className="my-5">Transfer funds to the  following account</h4>
+                <Col className="buyer_background_page_transfer" sm={12} md={{ size: 6, offset: 3 }}>
+                    <h4 className="mb-5">Transfer funds to the  following account</h4>
                     <div className="my-5">
                         <h3>IBAN : <span className="text-info">SJK3EIU34J2K4</span></h3>
                         <h3>SWAP ID : <span className="text-info">{buyerDataPost.swapId}</span></h3>

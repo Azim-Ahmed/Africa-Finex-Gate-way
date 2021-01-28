@@ -24,7 +24,7 @@ const SellTXIDGenerate = () => {
     return (
         <Container className=" mt-5">
             <Row>
-                <Col sm={12} md={{ size: 6, offset: 3 }}>
+                <Col className="sell_section_two_card_background" sm={12} md={{ size: 6, offset: 3 }}>
                     <h5>
                         Transfer your token <span className="text-info">{sellerData.token} </span>
                          to the following BSC(Binance Smart Chain)

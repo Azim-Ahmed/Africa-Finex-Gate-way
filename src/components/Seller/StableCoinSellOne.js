@@ -65,7 +65,10 @@ const StableCoinSellOne = () => {
             </Row>
             <Row className=" mt-5">
                 <Col className="sell_section_card_background" sm={12} md={{ size: 6, offset: 3 }}>
-                    {sellerData.token ? <h5 className="my-4">{sellerData.token}</h5> : ""}
+                    {sellerData.token ?
+                        <h5 className="mt-2 mb-5">
+                            You have  choosen  <span className="text-info">{sellerData.token}</span>
+                        </h5> : ""}
                     <input
                         onBlur={(e) => setSellQuantity(e.target.value)}
                         name="quantity"

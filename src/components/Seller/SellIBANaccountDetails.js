@@ -17,7 +17,7 @@ const SellIBANaccountDetails = () => {
     return (
         <Container className="text-center mt-4">
             <Row className=" mt-5">
-                <Col className="sell_section_card_background" sm={12} md={{ size: 6, offset: 3 }}>
+                <Col className="sell_section_two_card_background" sm={12} md={{ size: 6, offset: 3 }}>
                     <input
                         onBlur={(e) => setIBANaccount(e.target.value)}
                         name="quantity"
