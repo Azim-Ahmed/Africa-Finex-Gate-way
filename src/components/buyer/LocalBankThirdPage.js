@@ -73,8 +73,3 @@ const LocalbankthirdPage = () => {
 };
 
 export default LocalbankthirdPage;
-
-
-
-
-

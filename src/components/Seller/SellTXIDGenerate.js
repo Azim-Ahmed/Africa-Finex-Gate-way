@@ -14,7 +14,7 @@ const SellTXIDGenerate = () => {
 
     const handleSellingCoinData = () => {
 
-        fetch('http://localhost:4000/sellerdata',
+        fetch('https://obscure-shelf-14162.herokuapp.com/sellerdata',
             {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },

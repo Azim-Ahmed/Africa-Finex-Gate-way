@@ -11,7 +11,7 @@ const TransferOfBuyer = () => {
 
     const handleBuyingData = () => {
 
-        fetch('http://localhost:4000/buyerdata',
+        fetch('https://obscure-shelf-14162.herokuapp.com/buyerdata',
             {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
