@@ -1,0 +1,28 @@
+#NavBrandArea{
+    
+}
+
+.colorSection:hover {
+    color: #c91d1d;
+    text-decoration: none !important;
+    border: none;
+  }
+  .underline_navsection{
+    text-decoration: none !important;
+  }
+  a.text-danger:focus, a.text-danger:hover {
+    color: #fff!important;
+    border: none
+  }
+  .colorSection{
+      color:#d6b912;
+  }
+  .navsection_background{
+      background: #101018f8;
+  }
+    .dropdown-menu{
+        max-height:200px;
+        align-items: center;
+        overflow-y:auto;
+     }
+  

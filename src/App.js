@@ -1,24 +1,87 @@
-import logo from './logo.svg';
+import { createContext, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import './App.css';
+import BuyerSecondPage from "./components/buyer/BuyerSecondPage";
+import LocalbankthirdPage from "./components/buyer/LocalBankThirdPage";
+
+import SelectedCoin from "./components/buyer/SelectedCoin";
+import SuccessBuy from "./components/buyer/SuccessBuy";
+import TransferOfBuyer from "./components/buyer/TransferOfBuyer";
+import Footer from "./components/Footer/Footer";
+import NavSection from "./components/Header/NavSection";
+import SellFinishedInfo from "./components/Seller/SellFinishedInfo";
+import SellIBANaccountDetails from "./components/Seller/SellIBANaccountDetails";
+import SellTXIDGenerate from "./components/Seller/SellTXIDGenerate";
+import StableCoinSellOne from "./components/Seller/StableCoinSellOne";
+import StableCoinSellTwo from "./components/Seller/StableCoinSellTwo";
+
+export const UserContext = createContext()
 
 function App() {
+
+  const [buyerData, setBuyerData] = useState("")
+  const [walletID, setWalletID] = useState(null)
+  const [quantity, setQuantity] = useState("")
+  const [buyerDataPost, setBuyerDataPost] = useState({
+    name: "",
+    bankName: "",
+    quantityItem: "",
+    walletId: "",
+    swapId: ''
+  })
+  const [sellerData, setSellerData] = useState({
+    token: "",
+    sellingQuantity: "",
+    walletAddress: "",
+    IBANAcc: "",
+    TXID: "",
+    TXIdInfo: ""
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={{ buyerDataPost, setBuyerDataPost, buyerData, setBuyerData, walletID, setWalletID, quantity, setQuantity, sellerData, setSellerData }}>
+      <Router>
+        <NavSection />
+        <Switch>
+          <Route exact path="/">
+            <SelectedCoin />
+          </Route>
+          <Route path="/buyerSecondPage">
+            <BuyerSecondPage />
+
+          </Route>
+          <Route path="/localbank">
+            <LocalbankthirdPage />
+          </Route>
+          <Route path="/transferofbuyer">
+            <TransferOfBuyer />
+          </Route>
+          <Route path="/success">
+            <SuccessBuy />
+          </Route>
+          <Route path="/stablecoinsellone">
+            <StableCoinSellOne />
+          </Route>
+          <Route path="/stablecoinselltwo">
+            <StableCoinSellTwo />
+          </Route>
+          <Route path="/sellibnaccount">
+            <SellIBANaccountDetails />
+          </Route>
+          <Route path="/selltxidgenerate">
+            <SellTXIDGenerate />
+          </Route>
+          <Route path="/sellfinishedinfo">
+            <SellFinishedInfo />
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
+    </UserContext.Provider>
   );
 }
 
