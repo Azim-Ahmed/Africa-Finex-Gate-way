@@ -1,4 +1,4 @@
-import { useRef, useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { UserContext } from '../../App';
@@ -9,19 +9,20 @@ let WAValidator = require('wallet-address-validator');
 const BuyerSecondPage = () => {
 
     let history = useHistory();
-    const searchInput = useRef('');
-    const { setWalletID } = useContext(UserContext)
+
+    const { buyerDataPost } = useContext(UserContext)
+    const [walletID, setWalletID] = useState("")
 
 
-    const submitData = (e) => {
-        e.preventDefault()
-    }
+    buyerDataPost.walletId = walletID;
+    console.log(walletID, buyerDataPost);
+
+
     const validateKey = () => {
-        const InputData = searchInput.current.value;
-        var valid = WAValidator.validate(InputData, 'BTC');
+
+        var valid = WAValidator.validate(walletID, 'BTC');
 
         if (valid) {
-            setWalletID(InputData)
             history.push("/localbank")
 
         }
@@ -29,8 +30,8 @@ const BuyerSecondPage = () => {
             alert('This is a inValid address ');
             history.push("/buyerSecondPage")
         }
-
     }
+
     return (
         <Container className=" mt-5">
             <Row>
@@ -39,25 +40,25 @@ const BuyerSecondPage = () => {
                         Check with this wallet<br />
                     1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck
                     </p>
-                    <form onSubmit={submitData}>
-                        <input
-                            ref={searchInput}
-                            className="form-control"
-                            placeholder="Enter Your BSC Wallet"
-                            type="text"
-                        />
-                        <h4 className=" mt-5">You will receive your TAOA in this address</h4>
-                        <strong>
-                            <p className="mt-5 text-danger">
-                                Pay close attention mistakes will make you loose all your assets
-                                and there is nothing we can to help
+
+                    <input
+                        onBlur={(e) => setWalletID(e.target.value)}
+                        className="form-control"
+                        placeholder="Enter Your BSC Wallet"
+                        type="text"
+                    />
+                    <h4 className=" mt-5">You will receive your TAOA in this address</h4>
+                    <strong>
+                        <p className="mt-5 text-danger">
+                            Pay close attention mistakes will make you loose all your assets
+                            and there is nothing we can to help
                             </p>
-                        </strong>
-                        <Link to="/">
-                            <p className="my-5 text-center">Don't have a BSC Wallet yet?</p>
-                        </Link>
-                        <Button onClick={validateKey} block size="lg" type="submit" color="warning">Next</Button>
-                    </form>
+                    </strong>
+                    <Link to="/">
+                        <p className="my-5 text-center">Don't have a BSC Wallet yet?</p>
+                    </Link>
+                    <Button onClick={validateKey} block size="lg" type="submit" color="warning">Next</Button>
+
                 </Col>
             </Row>
         </Container>

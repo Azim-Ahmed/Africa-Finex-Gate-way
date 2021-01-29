@@ -22,12 +22,10 @@ const LocalbankthirdPage = () => {
 
     const [dropdownOpen, setOpen] = useState(false);
     const [localBank, setLocalBank] = useState("")
-    const { buyerData, quantity, buyerDataPost, setBuyerDataPost, walletID } = useContext(UserContext)
+    const { buyerDataPost, setBuyerDataPost } = useContext(UserContext)
 
-    buyerDataPost.name = buyerData;
+
     buyerDataPost.bankName = localBank;
-    buyerDataPost.quantityItem = quantity;
-    buyerDataPost.walletId = walletID;
     buyerDataPost.swapId = Math.floor(Math.random() * 1138913219272982)
 
     setBuyerDataPost(buyerDataPost);

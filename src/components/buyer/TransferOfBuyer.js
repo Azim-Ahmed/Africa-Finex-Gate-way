@@ -8,7 +8,7 @@ const TransferOfBuyer = () => {
 
     const { buyerDataPost } = useContext(UserContext)
 
-
+    console.log(buyerDataPost);
     const handleBuyingData = () => {
 
         fetch('https://obscure-shelf-14162.herokuapp.com/buyerdata',

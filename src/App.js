@@ -7,7 +7,6 @@ import {
 import './App.css';
 import BuyerSecondPage from "./components/buyer/BuyerSecondPage";
 import LocalbankthirdPage from "./components/buyer/LocalBankThirdPage";
-
 import SelectedCoin from "./components/buyer/SelectedCoin";
 import SuccessBuy from "./components/buyer/SuccessBuy";
 import TransferOfBuyer from "./components/buyer/TransferOfBuyer";
@@ -20,13 +19,12 @@ import SellTXIDGenerate from "./components/Seller/SellTXIDGenerate";
 import StableCoinSellOne from "./components/Seller/StableCoinSellOne";
 import StableCoinSellTwo from "./components/Seller/StableCoinSellTwo";
 
+//created store with createContext
 export const UserContext = createContext()
 
 function App() {
 
-  const [buyerData, setBuyerData] = useState("")
-  const [walletID, setWalletID] = useState(null)
-  const [quantity, setQuantity] = useState("")
+  //root states of this whole application
   const [buyerDataPost, setBuyerDataPost] = useState({
     name: "",
     bankName: "",
@@ -47,12 +45,6 @@ function App() {
     <UserContext.Provider value={{
       buyerDataPost,
       setBuyerDataPost,
-      buyerData,
-      setBuyerData,
-      walletID,
-      setWalletID,
-      quantity,
-      setQuantity,
       sellerData,
       setSellerData
     }}>

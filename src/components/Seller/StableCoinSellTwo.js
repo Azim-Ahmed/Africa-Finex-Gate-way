@@ -13,6 +13,7 @@ const StableCoinSellTwo = () => {
     //states of the components 
     const { sellerData } = useContext(UserContext)
     const [walletData, setWalletData] = useState('')
+
     //adding data to the store
     sellerData.walletAddress = walletData;
     console.log(sellerData);

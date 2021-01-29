@@ -1,8 +1,8 @@
-import React, { useEffect, useContext, useState, useRef } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { UserContext } from '../../App';
 import { Container, Row, Col, Form } from 'reactstrap';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './buyer.css'
 
 
@@ -12,11 +12,21 @@ const SelectedCoin = () => {
 
     let history = useHistory();
 
-    const { buyerData, setBuyerData, quantity, setQuantity } = useContext(UserContext)
+    //store and states of this component
+    const { buyerDataPost } = useContext(UserContext)
     const [dropdownOpen, setOpen] = useState(false);
+    const [buyerData, setBuyerData] = useState("");
+    const [quantity, setQuantity] = useState("")
     const [countriesData, setCountriesData] = useState([]);
-    const inputItemfromQuantity = useRef('')
 
+
+
+    //storing data to the store
+    buyerDataPost.name = buyerData;
+    buyerDataPost.quantityItem = quantity;
+
+
+    //using react hook for componentDidMount
     useEffect(() => {
         fetch('https://restcountries.eu/rest/v2/all')
             .then(res => res.json())
@@ -26,18 +36,18 @@ const SelectedCoin = () => {
 
     const toggle = () => setOpen(!dropdownOpen);
 
-    const handleQuantity = (e) => {
-        const InputQuantity = e.target.value
-        if (InputQuantity.trim() === "") {
+    const handleSubmitCoin = () => {
+        if (!quantity) {
             alert("please input correctly")
             history.push("/")
-
+        }
+        else if (!buyerData) {
+            alert("please select any Bank ")
+            history.push("/")
         }
         else {
-            setQuantity(InputQuantity)
             history.push("/buyerSecondPage")
         }
-
     }
 
     return (
@@ -73,25 +83,31 @@ const SelectedCoin = () => {
                     }
                     <Form>
                         <input
-                            ref={inputItemfromQuantity}
                             className="form-control"
-                            onBlur={handleQuantity}
+                            onBlur={(e) => setQuantity(e.target.value)}
                             required={true}
                             placeholder="Quantity"
                             type="number"
                             id="" />
                         <br />
-                        <h3>{quantity}</h3>
-                        {/* condition routing must */}
+                        {quantity ?
+                            <h4 className="my-5">
+                                You have entered quantity :
+                              <span className="text-info">{quantity}</span>
+                            </h4> : ""}
 
+
+                        {/* condition routing must */}
 
                         <Button
                             className="text-center mt-4"
                             type="submit"
+                            onClick={handleSubmitCoin}
                             block
                             size="lg"
                             color="warning"
                         >Next</Button>
+
 
                     </Form>
                 </Col>

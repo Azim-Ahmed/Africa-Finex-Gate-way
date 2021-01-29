@@ -88,7 +88,8 @@ const StableCoinSellOne = () => {
                             block
                             size="lg"
                             color="danger"
-                        >Sell now</Button>
+                        >Sell now
+                        </Button>
                     </Link>
                 </Col>
             </Row>
