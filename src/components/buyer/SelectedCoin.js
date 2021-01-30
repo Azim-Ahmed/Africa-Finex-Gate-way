@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { UserContext } from '../../App';
 import { Container, Row, Col, Form } from 'reactstrap';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './buyer.css'
 
 
@@ -19,12 +19,9 @@ const SelectedCoin = () => {
     const [quantity, setQuantity] = useState("")
     const [countriesData, setCountriesData] = useState([]);
 
-
-
     //storing data to the store
     buyerDataPost.name = buyerData;
     buyerDataPost.quantityItem = quantity;
-
 
     //using react hook for componentDidMount
     useEffect(() => {
@@ -106,7 +103,8 @@ const SelectedCoin = () => {
                             block
                             size="lg"
                             color="warning"
-                        >Next</Button>
+                        >Next
+                        </Button>
 
 
                     </Form>

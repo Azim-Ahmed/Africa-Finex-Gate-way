@@ -10,8 +10,8 @@ const SellTXIDGenerate = () => {
 
     sellerData.TXIdInfo = TXIDGenerate;
 
+    //post method to the server
     const handleSellingCoinData = () => {
-
         fetch('https://obscure-shelf-14162.herokuapp.com/sellerdata',
             {
                 method: 'POST',

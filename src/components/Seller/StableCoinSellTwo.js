@@ -16,24 +16,18 @@ const StableCoinSellTwo = () => {
 
     //adding data to the store
     sellerData.walletAddress = walletData;
-    console.log(sellerData);
+
 
     //funtions of this component
     const validateKey = () => {
-
         var valid = WAValidator.validate(walletData, 'BTC');
-
         if (valid) {
-
             history.push("/sellibnaccount")
-
-
         }
         else {
             alert('This is a inValid address');
             history.push("/stablecoinselltwo")
         }
-
     }
     return (
         <Container className=" mt-5">

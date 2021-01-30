@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 
 const TransferOfBuyer = () => {
-
+    //store of the application
     const { buyerDataPost } = useContext(UserContext)
 
-    console.log(buyerDataPost);
+    //post method to the server
     const handleBuyingData = () => {
-
         fetch('https://obscure-shelf-14162.herokuapp.com/buyerdata',
             {
                 method: 'POST',

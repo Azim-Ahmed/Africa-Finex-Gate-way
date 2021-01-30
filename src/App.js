@@ -5,6 +5,7 @@ import {
   Route
 } from "react-router-dom";
 import './App.css';
+import Banner from "./components/Banner/Banner";
 import BuyerSecondPage from "./components/buyer/BuyerSecondPage";
 import LocalbankthirdPage from "./components/buyer/LocalBankThirdPage";
 import SelectedCoin from "./components/buyer/SelectedCoin";
@@ -52,6 +53,9 @@ function App() {
         <NavSection />
         <Switch>
           <Route exact path="/">
+            <Banner />
+          </Route>
+          <Route path="/buySection">
             <SelectedCoin />
           </Route>
           <Route path="/buyerSecondPage">

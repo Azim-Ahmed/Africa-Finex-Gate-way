@@ -9,22 +9,20 @@ let WAValidator = require('wallet-address-validator');
 const BuyerSecondPage = () => {
 
     let history = useHistory();
-
+    //states and store of this component
     const { buyerDataPost } = useContext(UserContext)
     const [walletID, setWalletID] = useState("")
 
-
+    //updating store
     buyerDataPost.walletId = walletID;
-    console.log(walletID, buyerDataPost);
 
 
+    //validate method
     const validateKey = () => {
-
         var valid = WAValidator.validate(walletID, 'BTC');
 
         if (valid) {
             history.push("/localbank")
-
         }
         else {
             alert('This is a inValid address ');

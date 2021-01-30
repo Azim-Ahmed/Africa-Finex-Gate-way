@@ -24,8 +24,6 @@ const SellFinishedInfo = () => {
                             TXID : <span className="text-info"> {sellerData.TXID},</span> <br />
                         selling Quantity: <span className="text-info">  {sellerData.sellingQuantity}</span> <br />
                         timeStamp :    <span className="text-info">{new Date().toDateString()}</span>
-
-
                         </p> : ""}
                     </strong>
 

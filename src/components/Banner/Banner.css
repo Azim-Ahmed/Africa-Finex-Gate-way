@@ -1,0 +1,6 @@
+
+.Card_background{
+    background: linear-gradient(to right, #de6262, #ffb88c);
+    box-shadow: 2px 2px 7px lightgray;
+    margin-top: 3rem;
+}
