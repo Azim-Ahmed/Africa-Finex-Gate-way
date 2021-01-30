@@ -1,28 +1,38 @@
-import { useContext, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { UserContext } from '../../App';
+import { setBuyerData } from '../../redux/actionCreators'
 
 
 let WAValidator = require('wallet-address-validator');
 
-const BuyerSecondPage = () => {
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setBuyerData: data => dispatch(setBuyerData(data)),
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        buyerDataPost: state.buyerDataPost
+    }
+}
+
+const BuyerSecondPage = (props) => {
 
     let history = useHistory();
-    //states and store of this component
-    const { buyerDataPost } = useContext(UserContext)
-    const [walletID, setWalletID] = useState("")
 
-    //updating store
-    buyerDataPost.walletId = walletID;
+    const { walletId } = props.buyerDataPost;
 
-
-    //validate method
     const validateKey = () => {
-        var valid = WAValidator.validate(walletID, 'BTC');
+
+        var valid = WAValidator.validate(walletId, 'BTC');
 
         if (valid) {
             history.push("/localbank")
+
         }
         else {
             alert('This is a inValid address ');
@@ -40,7 +50,7 @@ const BuyerSecondPage = () => {
                     </p>
 
                     <input
-                        onBlur={(e) => setWalletID(e.target.value)}
+                        onBlur={(e) => props.setBuyerData({ ...props.buyerDataPost, walletId: e.target.value })}
                         className="form-control"
                         placeholder="Enter Your BSC Wallet"
                         type="text"
@@ -62,5 +72,4 @@ const BuyerSecondPage = () => {
         </Container>
     );
 };
-
-export default BuyerSecondPage;
+export default connect(mapStateToProps, mapDispatchToProps)(BuyerSecondPage);

@@ -1,11 +1,19 @@
-import React, { useContext } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { UserContext } from '../../App';
 
-const SellFinishedInfo = () => {
-    //states
-    const { sellerData } = useContext(UserContext)
+
+
+const mapStateToProps = (state) => {
+    return {
+        sellerDataPost: state.sellerDataPost
+    }
+}
+
+
+const SellFinishedInfo = (props) => {
+    const { token, TXID, sellingQuantity } = props.sellerDataPost;
+
     return (
         <Container>
             <Row className="text-center">
@@ -17,13 +25,15 @@ const SellFinishedInfo = () => {
                         If you need any customer support , you can ask for it
                     </h4>
 
-                    <h2 className="mt-5">Token : {sellerData.token}</h2>
+                    <h2 className="mt-5">Token : {token}</h2>
 
                     <strong>
-                        {sellerData ? <p className="mt-5">
-                            TXID : <span className="text-info"> {sellerData.TXID},</span> <br />
-                        selling Quantity: <span className="text-info">  {sellerData.sellingQuantity}</span> <br />
+                        {props.sellerDataPost ? <p className="mt-5">
+                            TXID : <span className="text-info"> {TXID},</span> <br />
+                        selling Quantity: <span className="text-info">  {sellingQuantity}</span> <br />
                         timeStamp :    <span className="text-info">{new Date().toDateString()}</span>
+
+
                         </p> : ""}
                     </strong>
 
@@ -38,5 +48,4 @@ const SellFinishedInfo = () => {
         </Container>
     );
 };
-
-export default SellFinishedInfo;
+export default connect(mapStateToProps)(SellFinishedInfo);

@@ -1,10 +1,33 @@
 import { useContext, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { UserContext } from '../../App';
+import { setBuyerData } from '../../redux/actionCreators'
 
-const LocalbankthirdPage = () => {
+
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setBuyerData: data => dispatch(setBuyerData(data)),
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        buyerDataPost: state.buyerDataPost
+    }
+}
+
+
+
+
+
+
+const LocalbankthirdPage = (props) => {
+
+    const { bankName, swapId } = props.buyerDataPost;
     const BankName = [
         {
             name: "Central Bank"
@@ -21,14 +44,6 @@ const LocalbankthirdPage = () => {
     ]
 
     const [dropdownOpen, setOpen] = useState(false);
-    const [localBank, setLocalBank] = useState("")
-    const { buyerDataPost, setBuyerDataPost } = useContext(UserContext)
-
-
-    buyerDataPost.bankName = localBank;
-    buyerDataPost.swapId = Math.floor(Math.random() * 1138913219272982)
-
-    setBuyerDataPost(buyerDataPost);
 
     const toggle = () => setOpen(!dropdownOpen);
     return (
@@ -45,15 +60,16 @@ const LocalbankthirdPage = () => {
                         <DropdownMenu className="text-dark">
                             {BankName.map((bank, i) =>
                                 <DropdownItem
-                                    onClick={() => setLocalBank(bank.name)}
+                                    onClick={() => props.setBuyerData({ ...props.buyerDataPost, bankName: bank.name, swapId: Math.floor(Math.random() * 1138913219272982) })}
                                     key={i}
                                 >
                                     {bank.name}</DropdownItem>)}
                         </DropdownMenu>
                     </ButtonDropdown>
-                    {localBank ?
+                    {bankName ?
                         <h4>
-                            You have choosen <span className="text-info"> {localBank} </span>
+                            You have choosen <span className="text-info"> {bankName} </span> <br />  <br />
+                          Your SwapId :  <span className="text-info"> {swapId} </span>
                         </h4> : ""}
                     <strong>
                         <p className="mt-5 text-dark">
@@ -66,7 +82,7 @@ const LocalbankthirdPage = () => {
                     <Link to="/">
                         <p className="text-center my-5" >How long does it usually take ?</p>
                     </Link>
-                    <Link to={buyerDataPost.bankName ? '/transferofbuyer' : "/localbank"}>
+                    <Link to={bankName ? '/transferofbuyer' : "/localbank"}>
                         <Button block size="lg" type="submit" color="warning">Next</Button>
                     </Link>
                 </Col>
@@ -74,5 +90,5 @@ const LocalbankthirdPage = () => {
         </Container>
     );
 };
+export default connect(mapStateToProps, mapDispatchToProps)(LocalbankthirdPage);
 
-export default LocalbankthirdPage;

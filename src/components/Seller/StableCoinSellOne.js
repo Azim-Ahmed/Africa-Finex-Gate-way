@@ -1,11 +1,29 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { connect } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './seller.css'
-import { UserContext } from '../../App';
+import { setSellerData } from '../../redux/actionCreators'
 
-const StableCoinSellOne = () => {
+
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setSellerData: data => dispatch(setSellerData(data)),
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        sellerDataPost: state.sellerDataPost
+    }
+}
+
+const StableCoinSellOne = (props) => {
+
+    const { sellingQuantity, token } = props.sellerDataPost;
 
     //dummy token data
     const tokens = [
@@ -25,19 +43,12 @@ const StableCoinSellOne = () => {
 
 
 
-    //states of this component
-    const { sellerData } = useContext(UserContext)
-    const [sellQuantity, setSellQuantity] = useState('')
-    const [token, setToken] = useState('')
+    //states of this component    
     const [dropdownOpen, setOpen] = useState(false);
-
-    //integrate data to the store
-    sellerData.token = token;
-    sellerData.sellingQuantity = sellQuantity;
-
-
     //functions of this components
     const toggle = () => setOpen(!dropdownOpen);
+
+
     return (
         <Container className="text-center mt-4">
             <Row>
@@ -55,7 +66,7 @@ const StableCoinSellOne = () => {
                             {tokens.map((item, i) =>
                                 <DropdownItem
                                     key={i}
-                                    onClick={() => setToken(item.name)}
+                                    onClick={() => props.setSellerData({ ...props.sellerDataPost, token: item.name })}
                                 >
                                     {item.name}
                                 </DropdownItem>)}
@@ -65,12 +76,12 @@ const StableCoinSellOne = () => {
             </Row>
             <Row className=" mt-5">
                 <Col className="sell_section_card_background" sm={12} md={{ size: 6, offset: 3 }}>
-                    {sellerData.token ?
+                    {token ?
                         <h5 className="mt-2 mb-5">
-                            You have  choosen  <span className="text-info">{sellerData.token}</span>
+                            You have  choosen  <span className="text-info">{token}</span>
                         </h5> : ""}
                     <input
-                        onBlur={(e) => setSellQuantity(e.target.value)}
+                        onBlur={(e) => props.setSellerData({ ...props.sellerDataPost, sellingQuantity: e.target.value })}
                         name="quantity"
                         type="number"
                         placeholder="Quantity"
@@ -80,7 +91,7 @@ const StableCoinSellOne = () => {
                     <h4 className="my-5">You will get X AOA  @Preco  TAOA/AOA</h4>
 
                     {/* condition routing must */}
-                    <Link to={sellerData.token && sellerData.sellingQuantity ? "/stablecoinselltwo" :
+                    <Link to={token && sellingQuantity ? "/stablecoinselltwo" :
                         "stablecoinsellone"}>
                         <Button
                             className="text-center mt-4"
@@ -96,5 +107,4 @@ const StableCoinSellOne = () => {
         </Container>
     );
 };
-
-export default StableCoinSellOne;
+export default connect(mapStateToProps, mapDispatchToProps)(StableCoinSellOne);

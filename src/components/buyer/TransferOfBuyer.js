@@ -1,15 +1,20 @@
-import React from 'react';
-import { useContext } from 'react';
+import { connect } from 'react-redux';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../App';
 
-const TransferOfBuyer = () => {
-    //store of the application
-    const { buyerDataPost } = useContext(UserContext)
 
-    //post method to the server
+const mapStateToProps = (state) => {
+    return {
+        buyerDataPost: state.buyerDataPost
+    }
+}
+
+const TransferOfBuyer = (props) => {
+
+    const buyerDataPost = props.buyerDataPost;
+    console.log(buyerDataPost);
     const handleBuyingData = () => {
+
         fetch('https://obscure-shelf-14162.herokuapp.com/buyerdata',
             {
                 method: 'POST',
@@ -55,5 +60,5 @@ const TransferOfBuyer = () => {
         </Container>
     );
 };
+export default connect(mapStateToProps)(TransferOfBuyer);
 
-export default TransferOfBuyer;

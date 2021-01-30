@@ -1,4 +1,3 @@
-import { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,79 +19,52 @@ import SellTXIDGenerate from "./components/Seller/SellTXIDGenerate";
 import StableCoinSellOne from "./components/Seller/StableCoinSellOne";
 import StableCoinSellTwo from "./components/Seller/StableCoinSellTwo";
 
-//created store with createContext
-export const UserContext = createContext()
-
 function App() {
 
-  //root states of this whole application
-  const [buyerDataPost, setBuyerDataPost] = useState({
-    name: "",
-    bankName: "",
-    quantityItem: "",
-    walletId: "",
-    swapId: ''
-  })
-  const [sellerData, setSellerData] = useState({
-    token: "",
-    sellingQuantity: "",
-    walletAddress: "",
-    IBANAcc: "",
-    TXID: "",
-    TXIdInfo: ""
-  })
-
   return (
-    <UserContext.Provider value={{
-      buyerDataPost,
-      setBuyerDataPost,
-      sellerData,
-      setSellerData
-    }}>
-      <Router>
-        <NavSection />
-        <Switch>
-          <Route exact path="/">
-            <Banner />
-          </Route>
-          <Route path="/buySection">
-            <SelectedCoin />
-          </Route>
-          <Route path="/buyerSecondPage">
-            <BuyerSecondPage />
+    <Router>
+      <NavSection />
+      <Switch>
+        <Route exact path="/">
+          <Banner />
+        </Route>
+        <Route path="/buySection">
+          <SelectedCoin />
+        </Route>
+        <Route path="/buyerSecondPage">
+          <BuyerSecondPage />
+        </Route>
+        <Route path="/localbank">
+          <LocalbankthirdPage />
+        </Route>
+        <Route path="/transferofbuyer">
+          <TransferOfBuyer />
+        </Route>
+        <Route path="/success">
+          <SuccessBuy />
+        </Route>
+        <Route path="/stablecoinsellone">
+          <StableCoinSellOne />
+        </Route>
+        <Route path="/stablecoinselltwo">
+          <StableCoinSellTwo />
+        </Route>
+        <Route path="/sellibnaccount">
+          <SellIBANaccountDetails />
+        </Route>
+        <Route path="/selltxidgenerate">
+          <SellTXIDGenerate />
+        </Route>
+        <Route path="/sellfinishedinfo">
+          <SellFinishedInfo />
+        </Route>
+        <Route path="/*">
+          <NoServices />
+        </Route>
+      </Switch>
+      <Footer />
+    </Router>
 
-          </Route>
-          <Route path="/localbank">
-            <LocalbankthirdPage />
-          </Route>
-          <Route path="/transferofbuyer">
-            <TransferOfBuyer />
-          </Route>
-          <Route path="/success">
-            <SuccessBuy />
-          </Route>
-          <Route path="/stablecoinsellone">
-            <StableCoinSellOne />
-          </Route>
-          <Route path="/stablecoinselltwo">
-            <StableCoinSellTwo />
-          </Route>
-          <Route path="/sellibnaccount">
-            <SellIBANaccountDetails />
-          </Route>
-          <Route path="/selltxidgenerate">
-            <SellTXIDGenerate />
-          </Route>
-          <Route path="/sellfinishedinfo">
-            <SellFinishedInfo />
-          </Route>
-          <Route path="/*">
-            <NoServices />
-          </Route>
-        </Switch>
-        <Footer />
-      </Router>
-    </UserContext.Provider>
   );
 }
 

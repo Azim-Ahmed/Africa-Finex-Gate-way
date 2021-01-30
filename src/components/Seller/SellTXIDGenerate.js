@@ -1,22 +1,33 @@
-import { useContext, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { UserContext } from '../../App';
+import { setSellerData } from '../../redux/actionCreators';
 
-const SellTXIDGenerate = () => {
-    //states of the components 
-    const { sellerData } = useContext(UserContext)
-    const [TXIDGenerate, setTXIDGenerate] = useState("")
+//declaring data from the redux
+const mapDispatchToProps = dispatch => {
+    return {
+        setSellerData: data => dispatch(setSellerData(data)),
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+        sellerDataPost: state.sellerDataPost
+    }
+}
 
-    sellerData.TXIdInfo = TXIDGenerate;
+const SellTXIDGenerate = (props) => {
 
-    //post method to the server
+
+    const { token, TXID } = props.sellerDataPost;
+    const sellerDataPost = props.sellerDataPost;
+
     const handleSellingCoinData = () => {
+
         fetch('https://obscure-shelf-14162.herokuapp.com/sellerdata',
             {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
-                body: JSON.stringify(sellerData)
+                body: JSON.stringify(sellerDataPost)
             }
         )
     }
@@ -26,16 +37,16 @@ const SellTXIDGenerate = () => {
             <Row>
                 <Col className="sell_section_two_card_background" sm={12} md={{ size: 6, offset: 3 }}>
                     <h5>
-                        Transfer your token <span className="text-info">{sellerData.token} </span>
+                        Transfer your token <span className="text-info">{token} </span>
                          to the following BSC(Binance Smart Chain)
                         address and enter the resulting TXID
                     </h5>
                     <h4 className="mt-5" >
-                        TXID :  <span className="text-info">{sellerData.TXID} </span>
+                        TXID :  <span className="text-info">{TXID} </span>
                     </h4>
                     <form>
                         <input
-                            onBlur={(e) => setTXIDGenerate(e.target.value)}
+                            onBlur={(e) => props.setSellerData({ ...props.sellerDataPost, TXIdInfo: e.target.value })}
                             className="form-control mt-5"
                             placeholder="Write some TXID mandatory Info"
                             type="text"
@@ -64,5 +75,4 @@ const SellTXIDGenerate = () => {
         </Container>
     );
 };
-
-export default SellTXIDGenerate;
+export default connect(mapStateToProps, mapDispatchToProps)(SellTXIDGenerate);

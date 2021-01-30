@@ -1,26 +1,37 @@
-import React, { useState } from 'react';
-import { useContext } from 'react';
+import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { UserContext } from '../../App';
+import { setSellerData } from '../../redux/actionCreators'
+
+
 
 let WAValidator = require('wallet-address-validator');
 
-const StableCoinSellTwo = () => {
+//declaring data from the redux
+const mapDispatchToProps = dispatch => {
+    return {
+        setSellerData: data => dispatch(setSellerData(data)),
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+        sellerDataPost: state.sellerDataPost
+    }
+}
+
+
+const StableCoinSellTwo = (props) => {
+
+    const { walletAddress } = props.sellerDataPost;
+    console.log(walletAddress);
 
     let history = useHistory();
 
-    //states of the components 
-    const { sellerData } = useContext(UserContext)
-    const [walletData, setWalletData] = useState('')
-
-    //adding data to the store
-    sellerData.walletAddress = walletData;
-
-
     //funtions of this component
     const validateKey = () => {
-        var valid = WAValidator.validate(walletData, 'BTC');
+
+        var valid = WAValidator.validate(walletAddress, 'BTC');
+
         if (valid) {
             history.push("/sellibnaccount")
         }
@@ -29,6 +40,7 @@ const StableCoinSellTwo = () => {
             history.push("/stablecoinselltwo")
         }
     }
+
     return (
         <Container className=" mt-5">
             <Row>
@@ -41,7 +53,7 @@ const StableCoinSellTwo = () => {
                             1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck
                     </p>
                         <input
-                            onBlur={(e) => setWalletData(e.target.value)}
+                            onBlur={(e) => props.setSellerData({ ...props.sellerDataPost, walletAddress: e.target.value })}
                             className="form-control"
                             placeholder="BSC Wallet address"
                             type="text"
@@ -71,5 +83,5 @@ const StableCoinSellTwo = () => {
         </Container>
     );
 };
+export default connect(mapStateToProps, mapDispatchToProps)(StableCoinSellTwo);
 
-export default StableCoinSellTwo;

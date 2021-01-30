@@ -1,44 +1,52 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { UserContext } from '../../App';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form } from 'reactstrap';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import './buyer.css'
+import { connect } from 'react-redux';
+import { setBuyerData } from '../../redux/actionCreators'
 
 
+const mapDispatchToProps = dispatch => {
+    return {
+        setBuyerData: data => dispatch(setBuyerData(data)),
+    }
+}
 
+const mapStateToProps = (state) => {
+    return {
+        buyerDataPost: state.buyerDataPost
+    }
+}
 
-const SelectedCoin = () => {
+const SelectedCoin = (props) => {
 
     let history = useHistory();
 
-    //store and states of this component
-    const { buyerDataPost } = useContext(UserContext)
-    const [dropdownOpen, setOpen] = useState(false);
-    const [buyerData, setBuyerData] = useState("");
-    const [quantity, setQuantity] = useState("")
-    const [countriesData, setCountriesData] = useState([]);
 
-    //storing data to the store
-    buyerDataPost.name = buyerData;
-    buyerDataPost.quantityItem = quantity;
+    const { name, quantityItem } = props.buyerDataPost;
+
+
+    //store of this component
+    const [dropdownOpen, setOpen] = useState(false);
+    const [countriesData, setCountriesData] = useState([]);
 
     //using react hook for componentDidMount
     useEffect(() => {
         fetch('https://restcountries.eu/rest/v2/all')
             .then(res => res.json())
             .then(data => setCountriesData(data))
-    }, [buyerData])
+    }, [props.buyerData])
 
 
     const toggle = () => setOpen(!dropdownOpen);
 
     const handleSubmitCoin = () => {
-        if (!quantity) {
+        if (!quantityItem) {
             alert("please input correctly")
             history.push("/")
         }
-        else if (!buyerData) {
+        else if (!name) {
             alert("please select any Bank ")
             history.push("/")
         }
@@ -61,7 +69,7 @@ const SelectedCoin = () => {
                                 <DropdownItem
                                     color="warning"
                                     key={i}
-                                    onClick={() => setBuyerData(item.name)}
+                                    onClick={() => props.setBuyerData({ ...props.buyerDataPost, name: item.name })}
                                 >
                                     {item.name} ||
                         ${item.currencies[0].code}
@@ -73,24 +81,24 @@ const SelectedCoin = () => {
             <Row className=" mt-5">
                 <Col className="card_section_of_buy" sm={12} md={{ size: 6, offset: 3 }}>
                     {
-                        buyerData ?
+                        name ?
                             <h4 className=" my-5">
-                                Your country name is <span className="text-info">{buyerData}</span>
+                                Your country name is <span className="text-info">{name}</span>
                             </h4> : ""
                     }
                     <Form>
                         <input
                             className="form-control"
-                            onBlur={(e) => setQuantity(e.target.value)}
+                            onBlur={(e) => props.setBuyerData({ ...props.buyerDataPost, quantityItem: e.target.value })}
                             required={true}
                             placeholder="Quantity"
                             type="number"
                             id="" />
                         <br />
-                        {quantity ?
+                        {quantityItem ?
                             <h4 className="my-5">
                                 You have entered quantity :
-                              <span className="text-info">{quantity}</span>
+                              <span className="text-info">{quantityItem}</span>
                             </h4> : ""}
 
 
@@ -116,4 +124,4 @@ const SelectedCoin = () => {
 
 
 
-export default SelectedCoin;
+export default connect(mapStateToProps, mapDispatchToProps)(SelectedCoin);

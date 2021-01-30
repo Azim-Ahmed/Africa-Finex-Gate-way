@@ -1,25 +1,30 @@
-
-import { useContext, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { UserContext } from '../../App';
+import { setSellerData } from '../../redux/actionCreators';
 
-const SellIBANaccountDetails = () => {
 
-    //states of the components 
-    const { sellerData } = useContext(UserContext)
-    const [IBANaccount, setIBANaccount] = useState('')
+//declaring data from the redux
+const mapDispatchToProps = dispatch => {
+    return {
+        setSellerData: data => dispatch(setSellerData(data)),
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+        sellerDataPost: state.sellerDataPost
+    }
+}
 
-    // adding data to the store
-    sellerData.IBANAcc = IBANaccount;
-    sellerData.TXID = Math.floor(Math.random() * 1138913219272982)
+
+const SellIBANaccountDetails = (props) => {
 
     return (
         <Container className="text-center mt-4">
             <Row className=" mt-5">
                 <Col className="sell_section_two_card_background" sm={12} md={{ size: 6, offset: 3 }}>
                     <input
-                        onBlur={(e) => setIBANaccount(e.target.value)}
+                        onBlur={(e) => props.setSellerData({ ...props.sellerDataPost, IBANAcc: e.target.value, TXID: Math.floor(Math.random() * 1138913219272982) })}
                         name="quantity"
                         placeholder="Enter your IBAN acc. details to be credited"
                         className="form-control my-5"
@@ -42,5 +47,4 @@ const SellIBANaccountDetails = () => {
         </Container>
     );
 };
-
-export default SellIBANaccountDetails;
+export default connect(mapStateToProps, mapDispatchToProps)(SellIBANaccountDetails);
